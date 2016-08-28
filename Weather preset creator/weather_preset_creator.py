@@ -58,6 +58,7 @@ def realisticRoadTemp(angle,ambient,coeff):
 	return int(d)
 	
 ###TODO: Take in a server cfg, find time of day, create realisitc road temp and use it for the random presets. Needs weather.ini coeffs and sun angle.
+###TODO: Gotta add in fog somewhere too. new for loop cause who needs efficiency?
 #Creates x amount of presets to a certain realistic setting.
 def createPresets(trackdetails,amount,fog):
 	#Weather types for the kind of weather expected.
@@ -128,4 +129,4 @@ def main():
 	presets = createPresets(selected,amount,fog)
 	for preset in presets:
 		print preset
-main()
+#main()
