@@ -12,12 +12,13 @@
 
 <div class="container col-md-12">
 <h2>ACRL Server config editor</h2>
+<form action="/create" method="POST">
 <div class="col-md-6">
   <p>Select the correct track for your race:</p>
     <div class="form-group">
 	{% block content %}
       <label for="sel1">Tracks:</label>
-      <select class="form-control" id="sel1">
+      <select class="form-control" name="track">
 	  	{% for track in tracks %}
 		<option>{{track}}</option>
 		{% endfor %}

@@ -1,7 +1,7 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,send_from_directory
 import weather_preset_creator as wp
 import cfgparser as cp
-app = Flask(__name__)
+app = Flask(__name__,static_url_path='/static')
 print app
 
 
@@ -13,7 +13,7 @@ def handler():
         tracknames.append(wp.trackdetails[i]['name'])
     details = cp.getcfgDetails()
     details['TIME'] = details.pop('SUN_ANGLE')
-    details
+    details['TIME'] = wp.sunAngleToTime(int(details.pop('TIME')),False)
     keys = ['TIME','SESSION_START','SESSION_TRANSFER','LAP_GAIN']
     return render_template('handle.html',tracks=tracknames,details=details,keys=keys)
 
@@ -22,13 +22,19 @@ def handler():
 def file_upload():
     if request.method=="POST":
             f = request.files['file']
-            f.save('server_cfg.ini')
+            f.save('static/server_cfg.ini')
 
-    return 'File uploaded!'
+    return 'File uploaded!<a href="/">Go back.</a>'
 
 @app.route('/create',methods=['POST'])
 def create_config():
-    angle = "something went wrong :("
+    form = ""
     if request.method=="POST":
-        angle = request.form.get("TIME")
-    return angle
+        angle = request.form
+        for key,value in angle.iteritems():
+            form+=str(value)+" "
+    return 'Config created! find it here: <a href="static/server_cfg.ini">Download</a>'
+
+@app.route('/weather')
+def serve_weditor():
+    return render_template('weditor.html')

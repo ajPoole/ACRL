@@ -2,6 +2,7 @@
 #-*- coding: utf-8 -*-
 import random
 import math
+import ast
 
 welcome_msg="""
 ###################################
@@ -11,18 +12,25 @@ welcome_msg="""
 """
 
 #Database of realistic weather taken from actual racing
-trackdetails = [
-{"name":"Red Bull Ring","ambient":28,"track_relative":11,"ambient_r":3,"road_r":4,"type":"hot"},
-{"name":"Laguna Seca","ambient":24,"track_relative":5,"ambient_r":1,"road_r":2,"type":"cold"},
-{"name":"Algarve","ambient":27,"track_relative":11,"ambient_r":2,"road_r":4,"type":"hot"},
-{"name":"Road America","ambient":13,"track_relative":-3,"ambient_r":2,"road_r":1,"type":"cold"},
-{"name":"Silverstone","ambient":8,"track_relative":2,"ambient_r":1,"road_r":2,"type":"cold"},
-{"name":"Paul Ricard","ambient":32,"track_relative":8,"ambient_r":4,"road_r":1,"type":"hot"},
-{"name":"Nurburgring","ambient":18,"track_relative":11,"ambient_r":2,"road_r":2,"type":"hot"},
-{"name":"Misano cold","ambient":18,"track_relative":1,"ambient_r":2,"road_r":1,"type":"cold"},
-{"name":"Misano hot","ambient":23,"track_relative":13,"ambient_r":3,"road_r":3,"type":"hot"}
-]
+#trackdetails = [
+#{"name":"Red Bull Ring","ambient":28,"track_relative":11,"ambient_r":3,"road_r":4,"type":"hot"},
+#{"name":"Laguna Seca","ambient":24,"track_relative":5,"ambient_r":1,"road_r":2,"type":"cold"},
+#{"name":"Algarve","ambient":27,"track_relative":11,"ambient_r":2,"road_r":4,"type":"hot"},
+#{"name":"Road America","ambient":13,"track_relative":-3,"ambient_r":2,"road_r":1,"type":"cold"},
+#{"name":"Silverstone","ambient":8,"track_relative":2,"ambient_r":1,"road_r":2,"type":"cold"},
+#{"name":"Paul Ricard","ambient":32,"track_relative":8,"ambient_r":4,"road_r":1,"type":"hot"},
+#{"name":"Nurburgring","ambient":18,"track_relative":11,"ambient_r":2,"road_r":2,"type":"hot"},
+#{"name":"Misano cold","ambient":18,"track_relative":1,"ambient_r":2,"road_r":1,"type":"cold"},
+#{"name":"Misano hot","ambient":23,"track_relative":13,"ambient_r":3,"road_r":3,"type":"hot"}
+#]
 
+
+#Build track database from the file
+trackdetails = []
+with open('copy_of_weather.py','r') as tracks:
+    for track in tracks.readlines():
+        trackdetails.append(ast.literal_eval(track.strip()))
+    
 """
 [WEATHER_0]
 GRAPHICS=3_clear
@@ -37,7 +45,7 @@ VARIATION_ROAD=0
 def sunAngleToTime(angle,timeToAngle):
 	convert = {}
 	j=8
-	for i in range(-80,80,16):
+	for i in range(-80,96,16):
 		convert.update({
 			i:j
 			})
@@ -46,6 +54,7 @@ def sunAngleToTime(angle,timeToAngle):
 		inv_map = {v: k for k, v in convert.items()}
 		return inv_map[angle]
 	else:
+                print convert
 		return convert[angle]
 
 
@@ -130,3 +139,4 @@ def main():
 	for preset in presets:
 		print preset
 #main()
+#print sunAngleToTime(80,False)
