@@ -13,19 +13,10 @@
 <div class="container col-md-12">
 <h2>ACRL Server config editor</h2>
 <div class="col-md-6">
-	<p>Upload the server preset you'd like to use(the ones twizzR made and uploaded)</p>
-	<form action="/upload" method="POST" enctype="multipart/form-data">
-	 <label class="control-label">Select File</label>
-		<input id="cfg" type="file" name="file" class="file"/>
-		<input type="submit"/>
-	</form>
-</div>
-<div class="col-md-6">
   <p>Select the correct track for your race:</p>
-  <form>
     <div class="form-group">
 	{% block content %}
-      <label for="sel1">Select list (select one):</label>
+      <label for="sel1">Tracks:</label>
       <select class="form-control" id="sel1">
 	  	{% for track in tracks %}
 		<option>{{track}}</option>
@@ -33,15 +24,26 @@
       </select>
     </div>
   </div>
-</div>
 
+<form action="/create" method="POST">
 <div class="col-md-6">
 	{% for key in keys %}
 	<label for="usr">{{key}}</label>
-	  <input type="text" class="form-control" id="usr" value="{{details[key]}}"></input>
+	  <input type="text" class="form-control" name="{{key}}" value="{{details[key]}}"></input>
 	  {% endfor %}
 	  {% endblock %}
-	  </div>
+<input type="submit" value="Make cfg!"/>
+</div>
 </form>
+</div>
+
+<div class="col-md-12">
+	<p>If needed, upload the server preset you'd like to use(the ones twizzR made and uploaded)</p>
+	<form action="/upload" method="POST" enctype="multipart/form-data">
+	 <label class="control-label">Select File</label>
+		<input id="cfg" type="file" name="file" class="file"/>
+		<input type="submit" value="Submit"/>
+	</form>
+</div>
 </body>
 </html>
