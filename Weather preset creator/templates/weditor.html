@@ -1,0 +1,31 @@
+{% include 'header.html' %}
+<body>
+
+<div class="container col-md-12">
+<h2>{{title}}</h2>
+<form action="/weather/create" method="POST">
+<div class="col-md-6">
+  <p>Select the track you want to edit:(not working yet)</p>
+    <div class="form-group">
+        {% block content %}
+      <label for="sel1">Tracks:</label>
+      <select class="form-control" name="track">
+                {% for track in tracks %}
+                <option>{{track}}</option>
+                {% endfor %}
+      </select>
+    </div>
+  </div>
+
+<form action="/weather/create" method="POST">
+<div class="col-md-6">
+        {% for key in keys %}
+        <label for="usr">{{key}}</label>
+          <input type="text" class="form-control" name="{{key}}"></input>
+          {% endfor %}
+          {% endblock %}
+<input type="submit" value="Add template"/>
+</div>
+</form>
+</div>
+</body>
