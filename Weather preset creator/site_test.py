@@ -45,9 +45,6 @@ def serve_weditor():
 @app.route('/weather/create',methods=['POST'])
 def add_weather_template():
     if request.method=="POST":
-            values = request.form
-            for key,value in values.iteritems():
-                print key,value
-            return we.addRealisticWeather(values['track'],values['layout'],
-            values['name'],values['ambient'],values['track_relative'],
-            values['ambient_r'],values['track_r'],values['type'])
+        values = request.form
+        status = we.addRealisticWeather(str(values['track']),str(values['layout']),str(values['name']),str(values['ambient']),str(values['track_relative']),str(values['ambient_r']),str(values['road_r']),str(values['type']))
+    return status

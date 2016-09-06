@@ -43,4 +43,6 @@ def getWeatherDictKeys():
     for key in trackdetails[0]:
         keys.append(key)
     return keys
-print getWeatherDictKeys()
+
+#status = addRealisticWeather("ks_test","gp","Test 2","23","10","3","4","hot")
+#print status

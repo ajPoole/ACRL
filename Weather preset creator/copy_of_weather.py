@@ -9,3 +9,7 @@
 {"track":"misano","layout":"","name":"Misano cold","ambient":18,"track_relative":1,"ambient_r":2,"road_r":1,"type":"cold"}
 {"track":"misano","layout":"","name":"Misano hot","ambient":23,"track_relative":13,"ambient_r":3,"road_r":3,"type":"hot"}
 {"track":"test","layout":"t_est","name":"Test","ambient":26,"track_relative":10,"ambient_r":2,"track_r":1,"type":"hot"}
+{"track":"ks_test","layout":"gp","name":"Test 2","ambient":23,"track_relative":10,"ambient_r":3,"track_r":4,"type":"hot"}
+{"track":"Hei","layout":"Hallo","name":"Tjoho","ambient":23,"track_relative":10,"ambient_r":3,"track_r":2,"type":"hot"}
+{"track":"Pesto","layout":"gp","name":"pest","ambient":24,"track_relative":7,"ambient_r":2,"track_r":3,"type":"hot"}
+{"track":"ks_vallelunga","layout":"te_st","name":"Vallelunga","ambient":25,"track_relative":10,"ambient_r":2,"track_r":4,"type":"hot"}
