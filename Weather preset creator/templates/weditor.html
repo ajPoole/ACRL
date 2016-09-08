@@ -1,17 +1,44 @@
 {% include 'header.html' %}
 <body>
 
+<script type=text/javascript>
+var dbg;
+$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  $(document).ready(function() {
+	console.log('start of ready?');
+	var form = document.forms.weatherForm,
+	elem = form.elements;
+//	elem.tracks.onchange = fillForm();
+	console.log('end of ready?');
+//	})
+elem.tracks.onchange = function fillForm() {
+		console.log('start of fillForm');
+      $.getJSON($SCRIPT_ROOT+'/get_edit',
+        {trackname: $(elem.tracks).val()}
+//		{trackname: "Vallelunga"}
+      , function(data) {
+		  dbg=data;
+		{% for key in keys %}
+        $("#{{key}}").val(data.{{key}});
+	//	console.log(data.{{key}});
+		{% endfor %}
+      });
+	console.log('data: '+dbg);
+      return false;
+    };
+})
+</script>
 <div class="container col-md-12">
 <h2>{{title}}</h2>
-<form action="/weather/create" method="POST">
-<div class="col-md-6">
+<form name="weatherForm" action="/weather/create" method="POST">
+<div class="col-md-3">
   <p>Select the track you want to edit:(not working yet)</p>
     <div class="form-group">
         {% block content %}
       <label for="sel1">Tracks:</label>
-      <select class="form-control" name="track">
+      <select class="form-control" name="tracks">
                 {% for track in tracks %}
-                <option>{{track}}</option>
+                <option id="trackChoice" name="{{track}}">{{track}}</option>
                 {% endfor %}
       </select>
     </div>
@@ -20,10 +47,15 @@
 <div class="col-md-6">
         {% for key in keys %}
         <label for="usr">{{key}}</label>
-          <input type="text" class="form-control" name="{{key}}"></input>
+          <input type="text" class="form-control" id="{{key}}" name="{{key}}">
           {% endfor %}
           {% endblock %}
-<input type="submit" value="Add template"/>
+<input type="submit" value="Submit"/>
+</div>
+<div class="col-md-3">
+<input type="radio" name="action" value="Add" checked>Add<br>
+<input type="radio" name="action" value="Edit">Edit<br>
+<input type="radio" name="action" value="Remove">Remove<br>
 </div>
 </form>
 </div>

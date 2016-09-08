@@ -12,6 +12,7 @@ welcome_msg="""
 """
 
 #Database of realistic weather taken from actual racing
+#USE track_r NOT ROAD_R Q_Q
 #trackdetails = [
 #{"name":"Red Bull Ring","ambient":28,"track_relative":11,"ambient_r":3,"road_r":4,"type":"hot"},
 #{"name":"Laguna Seca","ambient":24,"track_relative":5,"ambient_r":1,"road_r":2,"type":"cold"},
@@ -72,7 +73,7 @@ def realisticRoadTemp(angle,ambient,coeff):
 def createPresets(trackdetails,amount,fog):
 	#Weather types for the kind of weather expected.
 	hot = ["6_mid_clouds","3_clear","4_mid_clear","5_light_clouds","6_mid_clouds","3_clear"]
-	cold = ["5_light_clouds","7_heavy_clouds","6_mid_clouds","6_mid_clouds"]
+	cold = ["5_light_clouds","5_light_clouds","7_heavy_clouds","6_mid_clouds","6_mid_clouds"]
 	fog = ["2_light_fog","1_heavy_fog"]
 	presets = []
 	track_type = trackdetails['type']
@@ -88,7 +89,7 @@ def createPresets(trackdetails,amount,fog):
 	presetString+="BASE_TEMPERATURE_AMBIENT="+str(trackdetails['ambient'])+"\n"
 	presetString+="BASE_TEMPERATURE_ROAD="+str(trackdetails['track_relative'])+"\n"
 	presetString+="VARIATION_AMBIENT="+str(trackdetails['ambient_r'])+"\n"
-	presetString+="VARIATION_TRACK="+str(trackdetails['road_r'])+"\n"
+	presetString+="VARIATION_TRACK="+str(trackdetails['track_r'])+"\n"
 	presetString+="\n"
 	presets.append(presetString)
 	
@@ -108,7 +109,7 @@ def createPresets(trackdetails,amount,fog):
 		#presetString+="BASE_TEMPERATURE_ROAD="+str(realisticRoadTemp(angle,trackdetails['ambient'],coeff))+"\n"
 		presetString+="BASE_TEMPERATURE_ROAD="+str(+trackdetails['track_relative']+track_variation)+"\n"
 		presetString+="VARIATION_AMBIENT="+str(trackdetails['ambient_r'])+"\n"
-		presetString+="VARIATION_TRACK="+str(trackdetails['road_r'])+"\n"
+		presetString+="VARIATION_TRACK="+str(trackdetails['track_r'])+"\n"
 		presetString+="\n"
 		presets.append(presetString)
 	
