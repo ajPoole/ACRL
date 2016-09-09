@@ -55,7 +55,6 @@ def sunAngleToTime(angle,timeToAngle):
 		inv_map = {v: k for k, v in convert.items()}
 		return inv_map[angle]
 	else:
-                print convert
 		return convert[angle]
 
 
